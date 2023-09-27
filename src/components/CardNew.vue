@@ -1,6 +1,7 @@
 <template>
   <div class="container-card">
     <div class="card-image">
+      <IndicatorBadge label="PhoneArena" />
       <img :src="image" />
     </div>
     <div class="card-content">
@@ -16,6 +17,8 @@
 </template>
 
 <script setup>
+import IndicatorBadge from './IndicatorBadge.vue'
+
 defineProps({
   image: String,
   title: String,
@@ -38,6 +41,14 @@ defineProps({
   }
 }
 .card-image {
+  position: relative;
+
+  .badge {
+    position: absolute;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
   > img {
     width: 210px;
     height: 130px;
