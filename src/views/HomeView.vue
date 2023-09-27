@@ -21,7 +21,7 @@
     <div class="container-cards">
       <h3>Last News</h3>
       <div class="cards">
-        <CardNew
+        <CardArticle
           v-for="article in articles"
           :key="article.title"
           :url="article.url"
@@ -38,7 +38,7 @@
 
 <script setup>
 import axios from '../service/axios'
-import CardNew from '../components/CardNew.vue'
+import CardArticle from '../components/CardArticle.vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
 import { onMounted, ref } from 'vue'
