@@ -74,6 +74,16 @@ const linkRedirect = computed(() =>
 </script>
 
 <style scoped>
+.search {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: calc(100vh / 3.5);
+  margin-bottom: 3rem;
+}
 .container-cards {
   display: flex;
   flex-direction: column;
@@ -87,13 +97,5 @@ const linkRedirect = computed(() =>
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
-}
-.search {
-  text-align: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
 }
 </style>
