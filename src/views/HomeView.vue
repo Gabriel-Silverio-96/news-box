@@ -22,6 +22,9 @@
 
     <div class="container-cards">
       <h3>Last News</h3>
+
+      <LoadingIcon :isLoading="isLoading" />
+
       <div class="cards">
         <CardArticle
           v-for="article in articles"
@@ -44,9 +47,10 @@ import axios from '../service/axios'
 import CardArticle from '../components/CardArticle.vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
+import LoadingIcon from '../components/LoadingIcon.vue'
 
 const query = ref('')
-const isLoadingData = ref(true)
+const isLoading = ref(true)
 const articles = ref([])
 
 const fetchGetArticlesTopHeadlines = async () => {
@@ -58,7 +62,7 @@ const fetchGetArticlesTopHeadlines = async () => {
   } catch (error) {
     console.error(error)
   } finally {
-    isLoadingData.value = false
+    isLoading.value = false
   }
 }
 onMounted(fetchGetArticlesTopHeadlines)
