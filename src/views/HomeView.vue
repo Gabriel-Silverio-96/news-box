@@ -15,9 +15,9 @@
         :value="query"
         placeholder="Ex: Technology Trends"
       />
-      <CustomButton :disabled="isDisabledButtonSearch">
-        <RouterLink :to="`result-search?query=${query}`">Search</RouterLink>
-      </CustomButton>
+      <RouterLink :to="`result-search?query=${query}`">
+        <CustomButton :disabled="isDisabledButtonSearch">Search</CustomButton>
+      </RouterLink>
     </div>
 
     <div class="container-cards">

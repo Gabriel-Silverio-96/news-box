@@ -1,16 +1,20 @@
 <template>
-  <button :disabled="disabled" @click="onClick" :class="{ 'button-disabled': disabled }">
+  <button :disabled="disabled" @click="onClick" :class="buttonClass">
     <slot></slot>
   </button>
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   disabled: Boolean
 })
 
 const emit = defineEmits(['click'])
 const onClick = (event) => emit('click', event)
+
+const buttonClass = computed(() => ({ 'button-disabled': props.disabled }))
 </script>
 
 <style scoped>
