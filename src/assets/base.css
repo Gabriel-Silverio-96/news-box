@@ -6,6 +6,8 @@ https://designsystem.olist.io/latest/pt-BR/design-tokens/colors
   --color-primary-base: #3549FF;
   --color-gray-100: #f3f3fc;
   --color-gray-200: #909090;  
+  --color-common-white: #ffffff;  
+  --color-common-black: #000000;  
 }
 
 *,
