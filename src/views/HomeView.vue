@@ -21,21 +21,45 @@
     <div class="container-cards">
       <h3>Last News</h3>
       <div class="cards">
-        <CardNew />
-        <CardNew />
-        <CardNew />
+        <CardNew
+          v-for="article in articles"
+          :key="article.title"
+          :url="article.url"
+          :label="article.source.name"
+          :title="article.title"
+          :description="article.description"
+          :image="article.image"
+          :publishedAt="article.publishedAt"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import axios from '../service/axios'
 import CardNew from '../components/CardNew.vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const query = ref('')
+const isLoadingData = ref(true)
+const articles = ref([])
+
+const fetchGetArticlesTopHeadlines = async () => {
+  try {
+    const params = { params: { category: 'general', max: 3 } }
+    const { data } = await axios.get('top-headlines', params)
+
+    articles.value = data.articles
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoadingData.value = false
+  }
+}
+onMounted(fetchGetArticlesTopHeadlines)
 </script>
 
 <style scoped>
