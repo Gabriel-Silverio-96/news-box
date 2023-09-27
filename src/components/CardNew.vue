@@ -6,9 +6,9 @@
         <img :src="image" />
       </div>
       <div class="card-content">
-        <h3>{{ title }}</h3>
+        <h3 :title="title">{{ title }}</h3>
 
-        <p>
+        <p :title="description">
           {{ description }}
         </p>
 
@@ -42,6 +42,22 @@ defineProps({
     color: var(--color-gray-200);
     margin-top: 1rem;
     display: block;
+  }
+
+  > h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 13rem;
+  }
+
+  > p {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 13rem;
   }
 }
 .card-image {
