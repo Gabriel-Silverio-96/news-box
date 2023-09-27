@@ -1,0 +1,1 @@
+<template>Result search</template>
