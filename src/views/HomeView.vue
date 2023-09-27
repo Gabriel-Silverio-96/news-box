@@ -15,7 +15,7 @@
         :value="query"
         placeholder="Ex: Technology Trends"
       />
-      <RouterLink :to="`result-search?query=${query}`">
+      <RouterLink :to="linkRedirect">
         <CustomButton :disabled="isDisabledButtonSearch">Search</CustomButton>
       </RouterLink>
     </div>
@@ -64,6 +64,9 @@ const fetchGetArticlesTopHeadlines = async () => {
 onMounted(fetchGetArticlesTopHeadlines)
 
 const isDisabledButtonSearch = computed(() => query.value === '')
+const linkRedirect = computed(() =>
+  query.value === '' ? '' : `result-search?query=${query.value}`
+)
 </script>
 
 <style scoped>
