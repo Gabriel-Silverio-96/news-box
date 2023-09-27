@@ -1,29 +1,33 @@
 <template>
-  <div class="container-card">
-    <div class="card-image">
-      <IndicatorBadge label="PhoneArena" />
-      <img :src="image" />
-    </div>
-    <div class="card-content">
-      <h3>{{ title }}</h3>
+  <a :href="url" target="_blank" rel="noopener noreferrer">
+    <div class="container-card">
+      <div class="card-image">
+        <IndicatorBadge :label="label" />
+        <img :src="image" />
+      </div>
+      <div class="card-content">
+        <h3>{{ title }}</h3>
 
-      <p>
-        {{ description }}
-      </p>
+        <p>
+          {{ description }}
+        </p>
 
-      <span>Published: {{ publishedAt }}</span>
+        <span>Published: {{ publishedAt }}</span>
+      </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <script setup>
 import IndicatorBadge from './IndicatorBadge.vue'
 
 defineProps({
+  url: String,
   image: String,
   title: String,
   description: String,
-  publishedAt: String
+  publishedAt: String,
+  label: String
 })
 </script>
 
