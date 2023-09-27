@@ -1,12 +1,15 @@
 <template>
-  <button @click="onClick">
+  <button :disabled="disabled" @click="onClick" :class="{ 'button-disabled': disabled }">
     <slot></slot>
   </button>
 </template>
 
 <script setup>
-const emit = defineEmits(['click'])
+defineProps({
+  disabled: Boolean
+})
 
+const emit = defineEmits(['click'])
 const onClick = (event) => emit('click', event)
 </script>
 
@@ -25,5 +28,13 @@ button {
     background-color: transparent;
     color: var(--color-primary-base);
   }
+}
+
+.button-disabled {
+  pointer-events: none;
+  background-color: var(--color-gray-200);
+  color: var(--color-common-black);
+  border-color: transparent;
+  opacity: 0.5;
 }
 </style>

@@ -15,7 +15,9 @@
         :value="query"
         placeholder="Ex: Technology Trends"
       />
-      <CustomButton>Search</CustomButton>
+      <CustomButton :disabled="isDisabledButtonSearch">
+        <RouterLink :to="`result-search?query=${query}`">Search</RouterLink>
+      </CustomButton>
     </div>
 
     <div class="container-cards">
@@ -37,11 +39,11 @@
 </template>
 
 <script setup>
+import { computed, onMounted, ref } from 'vue'
 import axios from '../service/axios'
 import CardArticle from '../components/CardArticle.vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
-import { onMounted, ref } from 'vue'
 
 const query = ref('')
 const isLoadingData = ref(true)
@@ -60,6 +62,8 @@ const fetchGetArticlesTopHeadlines = async () => {
   }
 }
 onMounted(fetchGetArticlesTopHeadlines)
+
+const isDisabledButtonSearch = computed(() => query.value === '')
 </script>
 
 <style scoped>
