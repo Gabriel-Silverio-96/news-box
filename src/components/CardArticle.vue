@@ -2,8 +2,12 @@
   <a :href="url" target="_blank" rel="noopener noreferrer">
     <div class="container-card">
       <div class="card-image">
-        <IndicatorBadge :label="label" />
-        <img :src="image" />
+        <SkeletonComponent :show="isLoadingImage" />
+
+        <div v-show="!isLoadingImage">
+          <IndicatorBadge :label="label" />
+          <img :src="image" @load="onImageLoad" :alt="title" />
+        </div>
       </div>
       <div class="card-content">
         <h3 :title="title">{{ title }}</h3>
@@ -19,7 +23,9 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import IndicatorBadge from './IndicatorBadge.vue'
+import SkeletonComponent from './SkeletonComponent.vue'
 
 defineProps({
   url: String,
@@ -29,6 +35,12 @@ defineProps({
   publishedAt: String,
   label: String
 })
+
+const isLoadingImage = ref(true)
+
+const onImageLoad = () => {
+  isLoadingImage.value = false
+}
 </script>
 
 <style scoped>
@@ -61,18 +73,20 @@ defineProps({
   }
 }
 .card-image {
-  position: relative;
-
   .badge {
     position: absolute;
     margin-left: 0.5rem;
     margin-top: 0.5rem;
   }
 
-  > img {
-    width: 210px;
-    height: 130px;
-    border-radius: 1rem;
+  > div {
+    position: relative;
+
+    > img {
+      width: 210px;
+      height: 130px;
+      border-radius: 1rem;
+    }
   }
 }
 </style>
