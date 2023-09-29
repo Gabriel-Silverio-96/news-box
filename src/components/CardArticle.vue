@@ -1,25 +1,29 @@
 <template>
-  <a :href="url" target="_blank" rel="noopener noreferrer">
-    <div class="container-card">
-      <div class="card-image">
-        <SkeletonComponent :show="isLoadingImage" />
+  <article class="container-card" data-component="card">
+    <div class="card-image">
+      <SkeletonComponent :show="isLoadingImage" />
 
-        <div v-show="!isLoadingImage">
-          <IndicatorBadge :label="label" />
-          <img :src="image" @load="onImageLoad" :alt="title" />
-        </div>
-      </div>
-      <div class="card-content">
-        <h3 :title="title">{{ title }}</h3>
-
-        <p :title="description">
-          {{ description }}
-        </p>
-
-        <span>Published: {{ publishedAt }}</span>
+      <div v-show="!isLoadingImage">
+        <IndicatorBadge :label="label" />
+        <img :src="image" @load="onImageLoad" :alt="title" />
       </div>
     </div>
-  </a>
+    <div class="card-content">
+      <h3 :title="title">
+        <a :href="url" class="anchor" target="_blank" rel="noopener noreferrer">
+          {{ title }}
+        </a>
+      </h3>
+
+      <p :title="description">
+        {{ description }}
+      </p>
+
+      <span
+        >Published: <time :datetime="publishedAt">{{ publishedAt }}</time></span
+      >
+    </div>
+  </article>
 </template>
 
 <script setup>
@@ -46,6 +50,7 @@ const onImageLoad = () => {
 <style scoped>
 .container-card {
   width: 13rem;
+  position: relative;
 }
 
 .card-content {
@@ -88,5 +93,18 @@ const onImageLoad = () => {
       border-radius: 1rem;
     }
   }
+}
+
+.anchor::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.anchor:hover {
+  color: var(--color-primary-base);
 }
 </style>
