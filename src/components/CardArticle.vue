@@ -19,19 +19,20 @@
         {{ description }}
       </p>
 
-      <span
-        >Published: <time :datetime="publishedAt">{{ publishedAt }}</time></span
-      >
+      <span>
+        Published: <time :datetime="publishedAt">{{ formattedPublishedAt }}</time>
+      </span>
     </div>
   </article>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import IndicatorBadge from './IndicatorBadge.vue'
 import SkeletonComponent from './SkeletonComponent.vue'
+import { formatDate } from '../helps/format-date'
 
-defineProps({
+const { publishedAt } = defineProps({
   url: String,
   image: String,
   title: String,
@@ -45,6 +46,8 @@ const isLoadingImage = ref(true)
 const onImageLoad = () => {
   isLoadingImage.value = false
 }
+
+const formattedPublishedAt = computed(() => formatDate(publishedAt))
 </script>
 
 <style scoped>
