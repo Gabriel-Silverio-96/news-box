@@ -13,6 +13,7 @@
     </form>
     <div class="result-search">
       <LoadingIcon :isLoading="isLoading" />
+
       <div class="cards">
         <CardArticle
           v-for="(article, index) in articles"

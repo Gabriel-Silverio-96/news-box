@@ -15,6 +15,7 @@
         :value="query"
         placeholder="Ex: Technology Trends"
       />
+
       <RouterLink :to="linkRedirect">
         <CustomButton :disabled="isDisabledButtonSearch">Search</CustomButton>
       </RouterLink>
@@ -22,9 +23,7 @@
 
     <div class="container-cards">
       <h3>Last News</h3>
-
       <LoadingIcon :isLoading="isLoading" />
-
       <div class="cards">
         <CardArticle
           v-for="(article, index) in articles"
