@@ -1,6 +1,6 @@
 <template>
   <div class="container-result-search">
-    <div class="search">
+    <form class="search" @submit.prevent="onSubmit">
       <TextField
         id="query"
         type="text"
@@ -9,18 +9,20 @@
         placeholder="Ex: Technology Trends"
       />
 
-      <CustomButton> Search </CustomButton>
-    </div>
-
+      <CustomButton>Search</CustomButton>
+    </form>
     <div class="result-search">
+      <LoadingIcon :isLoading="isLoading" />
       <div class="cards">
         <CardArticle
-          url="https://www.reuters.com/business/autos-transportation/strikes-could-idle-more-detroit-three-auto-plants-friday-2023-09-29/"
-          label="Sources"
-          title="Exclusive: UAW to expand strike on Detroit 3 US automakers - sources"
-          description="The United Auto Workers are set to expand their strike of Detroit Three factories and walk off the job at one additional assembly plant at General Motors , Ford and Stellantis , three sources familiar with the matter said Friday."
-          image="https://www.reuters.com/resizer/i1_A4w5RxRC114M8G362-13dwZs=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/24KLIAKVHFKMNF5EIFRNRM5RLA.jpg"
-          publishedAt="2023-09-29T14:08:00Z"
+          v-for="(article, index) in articles"
+          :key="index"
+          :url="article.url"
+          :label="article.source.name"
+          :title="article.title"
+          :description="article.description"
+          :image="article.image"
+          :publishedAt="article.publishedAt"
         />
       </div>
     </div>
@@ -29,13 +31,37 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
 import CardArticle from '../components/CardArticle.vue'
+import axios from '../service/axios'
+import LoadingIcon from '../components/LoadingIcon.vue'
 
 const route = useRoute()
 const query = ref(route.query.query ?? '')
+const isLoading = ref(false)
+const articles = ref([])
+
+const fetchGetSearchArticles = async () => {
+  if (query.value === '') return
+
+  try {
+    isLoading.value = true
+    const params = { params: { q: query.value } }
+    const { data } = await axios.get('search', params)
+
+    articles.value = data.articles
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const onSubmit = () => fetchGetSearchArticles()
+
+onMounted(fetchGetSearchArticles)
 </script>
 
 <style scoped>
