@@ -27,8 +27,8 @@
 
       <div class="cards">
         <CardArticle
-          v-for="article in articles"
-          :key="article.title"
+          v-for="(article, index) in articles"
+          :key="index"
           :url="article.url"
           :label="article.source.name"
           :title="article.title"
