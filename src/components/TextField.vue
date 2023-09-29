@@ -34,7 +34,6 @@ const onInput = (event) => emit('update:modelValue', event.target.value)
 input {
   padding: 0.5rem 1rem;
   border-radius: 3rem;
-  width: auto;
   border: 1.4px solid var(--color-gray-200);
   outline: none;
   flex: 1;
