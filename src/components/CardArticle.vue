@@ -94,6 +94,7 @@ const formattedPublishedAt = computed(() => formatDate(publishedAt))
       width: 210px;
       height: 130px;
       border-radius: 1rem;
+      object-fit: cover;
     }
   }
 }
