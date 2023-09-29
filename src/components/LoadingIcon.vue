@@ -39,7 +39,9 @@ defineProps({
   }
 }
 .loading {
-  display: contents;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   > img {
     animation: rotate 1s linear infinite;
   }
