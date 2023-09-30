@@ -12,9 +12,9 @@
       <CustomButton>Search</CustomButton>
     </form>
     <div class="result-search">
-      <p v-show="!articles.length && !isLoading">Result not found</p>
-
+      <p v-show="!articles.length && !isLoading && !errorMessage">Result not found</p>
       <LoadingIcon :isLoading="isLoading" />
+      <AlertComponent :message="errorMessage" :show="errorMessage" severity="error" />
 
       <div class="cards">
         <CardArticle
@@ -33,14 +33,15 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
-import CustomButton from '../components/CustomButton.vue'
-import TextField from '../components/TextField.vue'
-import CardArticle from '../components/CardArticle.vue'
-import axios from '../service/axios'
-import LoadingIcon from '../components/LoadingIcon.vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import AlertComponent from '../components/AlertComponent.vue'
+import CardArticle from '../components/CardArticle.vue'
+import CustomButton from '../components/CustomButton.vue'
+import LoadingIcon from '../components/LoadingIcon.vue'
+import TextField from '../components/TextField.vue'
+import axios from '../service/axios'
 
 const store = useStore()
 const route = useRoute()
@@ -49,6 +50,7 @@ const router = useRouter()
 const query = ref(route.query.query ?? '')
 const isLoading = ref(false)
 const articles = ref([])
+const errorMessage = ref('')
 
 const fetchGetSearchArticles = async () => {
   try {
@@ -58,7 +60,10 @@ const fetchGetSearchArticles = async () => {
 
     articles.value = data.articles
   } catch (error) {
-    console.error(error)
+    const { data } = error.response
+    const [message] = data.errors
+
+    errorMessage.value = message
   } finally {
     isLoading.value = false
   }

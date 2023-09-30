@@ -24,6 +24,8 @@
     <div class="container-cards">
       <h3>Last News</h3>
       <LoadingIcon :isLoading="isLoading" />
+      <AlertComponent :message="errorMessage" :show="errorMessage" severity="error" />
+
       <div class="cards">
         <CardArticle
           v-for="(article, index) in articles"
@@ -49,6 +51,7 @@ import CardArticle from '../components/CardArticle.vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
 import LoadingIcon from '../components/LoadingIcon.vue'
+import AlertComponent from '../components/AlertComponent.vue'
 
 const store = useStore()
 const router = useRouter()
@@ -56,6 +59,7 @@ const router = useRouter()
 const query = ref('')
 const isLoading = ref(true)
 const articles = ref([])
+const errorMessage = ref('')
 
 const fetchGetArticlesTopHeadlines = async () => {
   try {
@@ -64,7 +68,10 @@ const fetchGetArticlesTopHeadlines = async () => {
 
     articles.value = data.articles
   } catch (error) {
-    console.error(error)
+    const { data } = error.response
+    const [message] = data.errors
+
+    errorMessage.value = message
   } finally {
     isLoading.value = false
   }
