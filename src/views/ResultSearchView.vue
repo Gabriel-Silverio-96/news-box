@@ -12,6 +12,8 @@
       <CustomButton>Search</CustomButton>
     </form>
     <div class="result-search">
+      <p v-show="!articles.length && !isLoading">Result not found</p>
+
       <LoadingIcon :isLoading="isLoading" />
 
       <div class="cards">
@@ -31,22 +33,24 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
 import CardArticle from '../components/CardArticle.vue'
 import axios from '../service/axios'
 import LoadingIcon from '../components/LoadingIcon.vue'
+import { useStore } from 'vuex'
 
+const store = useStore()
 const route = useRoute()
+const router = useRouter()
+
 const query = ref(route.query.query ?? '')
 const isLoading = ref(false)
 const articles = ref([])
 
 const fetchGetSearchArticles = async () => {
-  if (query.value === '') return
-
   try {
     isLoading.value = true
     const params = { params: { q: query.value } }
@@ -60,9 +64,23 @@ const fetchGetSearchArticles = async () => {
   }
 }
 
-const onSubmit = () => fetchGetSearchArticles()
+const onSubmit = () => {
+  const canMakeRequest = query.value === '' || route.query.query === ''
+  if (canMakeRequest) return
 
-onMounted(fetchGetSearchArticles)
+  fetchGetSearchArticles()
+  store.commit('addQuery', query.value)
+}
+
+onMounted(() => {
+  const haveRedirectPage = route.query.query === undefined
+  if (haveRedirectPage) {
+    router.push('/')
+    return
+  }
+
+  fetchGetSearchArticles()
+})
 </script>
 
 <style scoped>
