@@ -5,7 +5,7 @@
 
       <div v-show="!isLoadingImage">
         <IndicatorBadge :label="label" />
-        <img :src="image" @load="onImageLoad" :alt="title" />
+        <img :src="image" @load="onImageLoad" :alt="title" @error="onImageError" />
       </div>
     </div>
     <div class="card-content">
@@ -31,8 +31,9 @@ import { computed, ref } from 'vue'
 import IndicatorBadge from './IndicatorBadge.vue'
 import SkeletonComponent from './SkeletonComponent.vue'
 import { formatDate } from '../helps/format-date'
+import errorImage from '../assets/images/error-image.png'
 
-const { publishedAt } = defineProps({
+const { publishedAt, image } = defineProps({
   url: String,
   image: String,
   title: String,
@@ -45,6 +46,11 @@ const isLoadingImage = ref(true)
 
 const onImageLoad = () => {
   isLoadingImage.value = false
+}
+
+const onImageError = (event) => {
+  // Handle error image https://dev.to/zahidjabbar/image-binding-error-handling-in-vue-js-1pdp
+  event.target.src = errorImage
 }
 
 const formattedPublishedAt = computed(() => formatDate(publishedAt))
