@@ -16,9 +16,7 @@
         placeholder="Ex: Technology Trends"
       />
 
-      <RouterLink :to="linkRedirect">
-        <CustomButton :disabled="isDisabledButtonSearch">Search</CustomButton>
-      </RouterLink>
+      <CustomButton @click="onClickRedirect"> Search </CustomButton>
     </div>
 
     <div class="container-cards">
@@ -41,12 +39,17 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import axios from '../service/axios'
 import CardArticle from '../components/CardArticle.vue'
 import CustomButton from '../components/CustomButton.vue'
 import TextField from '../components/TextField.vue'
 import LoadingIcon from '../components/LoadingIcon.vue'
+
+const store = useStore()
+const router = useRouter()
 
 const query = ref('')
 const isLoading = ref(true)
@@ -66,10 +69,13 @@ const fetchGetArticlesTopHeadlines = async () => {
 }
 onMounted(fetchGetArticlesTopHeadlines)
 
-const isDisabledButtonSearch = computed(() => query.value === '')
-const linkRedirect = computed(() =>
-  query.value === '' ? '' : `result-search?query=${query.value}`
-)
+const onClickRedirect = () => {
+  if (query.value === '') return
+
+  const conditionalURL = query.value === '' ? '' : `result-search?query=${query.value}`
+  router.push(conditionalURL)
+  store.commit('addQuery', query)
+}
 </script>
 
 <style scoped>
