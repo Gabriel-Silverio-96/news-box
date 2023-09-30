@@ -8,7 +8,10 @@ https://designsystem.olist.io/latest/pt-BR/design-tokens/colors
   --color-gray-200: #909090;  
   --color-common-white: #ffffff;  
   --color-common-black: #000000; 
-  --color-alert-base:	#d23718; 
+  --color-error-base:	#d23718; 
+  --color-warning-base:	#ff9900; 
+  --color-info-base:#0099cc; 
+  --color-success-base:#00cc00; 
 }
 
 *,
@@ -20,7 +23,7 @@ https://designsystem.olist.io/latest/pt-BR/design-tokens/colors
 }   
 
 :focus-visible {
-  outline: 0.3rem solid var(--color-alert-base);
+  outline: 0.3rem solid var(--color-error-base);
   outline-style: dotted;
 }
 
