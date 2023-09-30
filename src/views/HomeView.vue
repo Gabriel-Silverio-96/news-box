@@ -76,7 +76,7 @@ const onSubmit = () => {
 
   const conditionalURL = query.value === '' ? '' : `result-search?query=${query.value}`
   router.push(conditionalURL)
-  store.commit('addQuery', query)
+  store.commit('addQuery', query.value)
 }
 </script>
 
