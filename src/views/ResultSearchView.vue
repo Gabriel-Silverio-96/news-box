@@ -12,7 +12,7 @@
       <CustomButton>Search</CustomButton>
     </form>
     <div class="result-search">
-      <p v-show="!articles.length && !isLoading && !errorMessage">Result not found</p>
+      <p v-show="showResultNotFoundMessage">Result not found</p>
       <LoadingIcon :isLoading="isLoading" />
       <AlertComponent :message="errorMessage" :show="errorMessage" severity="error" />
 
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import AlertComponent from '../components/AlertComponent.vue'
@@ -76,6 +76,10 @@ const onSubmit = () => {
   fetchGetSearchArticles()
   store.commit('addQuery', query.value)
 }
+
+const showResultNotFoundMessage = computed(() => {
+  return Boolean(articles.value.length) && Boolean(isLoading.value) && Boolean(errorMessage.value)
+})
 
 onMounted(() => {
   const haveRedirectPage = route.query.query === undefined
