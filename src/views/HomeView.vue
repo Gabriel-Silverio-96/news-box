@@ -8,15 +8,17 @@
         you're looking for?
       </h1>
 
-      <TextField
-        id="query"
-        type="text"
-        v-model="query"
-        :value="query"
-        placeholder="Ex: Technology Trends"
-      />
+      <form @submit.prevent="onSubmit">
+        <TextField
+          id="query"
+          type="text"
+          v-model="query"
+          :value="query"
+          placeholder="Ex: Technology Trends"
+        />
 
-      <CustomButton @click="onClickRedirect"> Search </CustomButton>
+        <CustomButton>Search</CustomButton>
+      </form>
     </div>
 
     <div class="container-cards">
@@ -69,7 +71,7 @@ const fetchGetArticlesTopHeadlines = async () => {
 }
 onMounted(fetchGetArticlesTopHeadlines)
 
-const onClickRedirect = () => {
+const onSubmit = () => {
   if (query.value === '') return
 
   const conditionalURL = query.value === '' ? '' : `result-search?query=${query.value}`
@@ -88,6 +90,14 @@ const onClickRedirect = () => {
   padding: 1rem;
   margin-top: calc(100vh / 3.5);
   margin-bottom: 3rem;
+
+  > form {
+    width: 100%;
+
+    > div {
+      margin-bottom: 1rem;
+    }
+  }
 }
 .container-cards {
   display: flex;
