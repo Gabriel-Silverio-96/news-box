@@ -26,22 +26,3 @@ https://designsystem.olist.io/latest/pt-BR/design-tokens/colors
   outline: 0.3rem solid var(--color-error-base);
   outline-style: dotted;
 }
-
-h1, h2, h3 {
-  font-weight: 700;
-}
-
-input {
-  &::placeholder {
-    font-style: italic;
-  }
-}
-
-body, button {
-  font-family: 'IBM Plex Sans', sans-serif;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
