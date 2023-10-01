@@ -1,28 +1,18 @@
 <template>
-  <div>
-    <div class="search">
-      <img src="@/assets/logo.svg" width="100" height="50" />
+  <div class="container-result-search">
+    <form class="search" @submit.prevent="onSubmit">
+      <TextField
+        id="query"
+        type="text"
+        v-model="query"
+        :value="query"
+        placeholder="Ex: Technology Trends"
+      />
 
-      <h1>
-        What's the new <br />
-        you're looking for?
-      </h1>
-
-      <form @submit.prevent="onSubmit">
-        <TextField
-          id="query"
-          type="text"
-          v-model="query"
-          :value="query"
-          placeholder="Ex: Technology Trends"
-        />
-
-        <CustomButton>Search</CustomButton>
-      </form>
-    </div>
-
-    <div class="container-cards">
-      <h3>Last News</h3>
+      <CustomButton>Search</CustomButton>
+    </form>
+    <div class="result-search">
+      <p v-show="showResultNotFoundMessage">Result not found</p>
       <LoadingIcon :isLoading="isLoading" />
       <AlertComponent :message="errorMessage" :show="errorMessage" severity="error" />
 
@@ -43,8 +33,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import AlertComponent from '@/components/AlertComponent.vue'
 import CardArticle from '@/components/CardArticle.vue'
@@ -54,17 +44,19 @@ import TextField from '@/components/TextField.vue'
 import axios from '@/service/axios'
 
 const store = useStore()
+const route = useRoute()
 const router = useRouter()
 
-const query = ref('')
-const isLoading = ref(true)
+const query = ref(route.query.query ?? '')
+const isLoading = ref(false)
 const articles = ref([])
 const errorMessage = ref('')
 
-const fetchGetArticlesTopHeadlines = async () => {
+const fetchGetSearchArticles = async () => {
   try {
-    const params = { params: { category: 'general', max: 3 } }
-    const { data } = await axios.get('top-headlines', params)
+    isLoading.value = true
+    const params = { params: { q: query.value } }
+    const { data } = await axios.get('search', params)
 
     articles.value = data.articles
   } catch (error) {
@@ -72,52 +64,58 @@ const fetchGetArticlesTopHeadlines = async () => {
     const [message] = data.errors
 
     errorMessage.value = message
+    articles.value = []
   } finally {
     isLoading.value = false
   }
 }
-onMounted(fetchGetArticlesTopHeadlines)
 
 const onSubmit = () => {
-  if (query.value === '') return
+  const canMakeRequest = query.value === '' || route.query.query === ''
+  if (canMakeRequest) return
 
-  const conditionalURL = query.value === '' ? '' : `result-search?query=${query.value}`
-  router.push(conditionalURL)
+  fetchGetSearchArticles()
   store.commit('addQuery', query.value)
 }
+
+const showResultNotFoundMessage = computed(() => {
+  return articles.value.length === 0 && !isLoading.value
+})
+
+onMounted(() => {
+  const haveRedirectPage = route.query.query === undefined
+  if (haveRedirectPage) {
+    router.push('/')
+    return
+  }
+
+  fetchGetSearchArticles()
+})
 </script>
 
 <style scoped>
-.search {
-  text-align: center;
+.container-result-search {
+  display: grid;
+  grid-template-rows: 10rem auto;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  margin-top: calc(100vh / 3.5);
-  margin-bottom: 3rem;
-
-  > form {
-    width: 100%;
-
-    > div {
-      margin-bottom: 1rem;
-    }
-  }
+  margin: auto;
+  max-width: 43rem;
+  width: auto;
 }
-.container-cards {
+.search {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  max-width: 38rem;
+  width: auto;
   gap: 1rem;
-  margin-top: 5rem;
 }
 
 .cards {
+  max-width: 43rem;
+  width: auto;
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
-  justify-content: center;
+  flex-grow: 1;
 }
 </style>
