@@ -64,6 +64,7 @@ const fetchGetSearchArticles = async () => {
     const [message] = data.errors
 
     errorMessage.value = message
+    articles.value = []
   } finally {
     isLoading.value = false
   }
@@ -78,7 +79,7 @@ const onSubmit = () => {
 }
 
 const showResultNotFoundMessage = computed(() => {
-  return Boolean(articles.value.length) && Boolean(isLoading.value) && Boolean(errorMessage.value)
+  return articles.value.length === 0 && !isLoading.value
 })
 
 onMounted(() => {
