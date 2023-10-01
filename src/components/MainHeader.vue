@@ -5,6 +5,7 @@
     </button>
   </header>
   <aside v-show="isOpenAside">
+    <RouterLink to="/">Home</RouterLink>
     <h3>Terms searched</h3>
 
     <div v-show="!state.querys.length">
@@ -38,6 +39,10 @@ header {
   position: fixed;
   top: 0;
   right: 0;
+
+  > button {
+    cursor: pointer;
+  }
 }
 
 aside {
@@ -49,5 +54,10 @@ aside {
   right: 0;
   top: 3rem;
   border-radius: 1rem 0 0 1rem;
+
+  > a {
+    display: block;
+    margin-bottom: 1rem;
+  }
 }
 </style>
