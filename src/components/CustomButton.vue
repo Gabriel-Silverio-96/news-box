@@ -21,7 +21,7 @@ const buttonClass = computed(() => ({ 'button-disabled': props.disabled }))
 button {
   background-color: var(--color-primary-base);
   color: var(--color-gray-100);
-  border: 1px solid var(--color-primary-base);
+  border: 0.0625rem solid var(--color-primary-base);
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   cursor: pointer;

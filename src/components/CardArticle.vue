@@ -97,8 +97,8 @@ const formattedPublishedAt = computed(() => formatDate(publishedAt))
     position: relative;
 
     > img {
-      width: 210px;
-      height: 130px;
+      width: 13.125rem;
+      height: 8.125rem;
       border-radius: 1rem;
       object-fit: cover;
     }
