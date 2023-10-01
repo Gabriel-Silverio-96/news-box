@@ -8,9 +8,19 @@ export const ERROR_MESSAGE_FORMAT_DATE_IS_NOT_VALID = "this is not a valid date 
  * @param {string} date - The date string to be formatted.
  * @param {Intl.DateTimeFormatOptions} [options] - An object containing formatting options.
  * @returns {string} The formatted date string.
- * @throws {Error} Throws an error if `date` is undefined.
  * 
- * @link {Intl.DateTimeFormatOptions} options - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+ * @link {Intl.DateTimeFormatOptions} options - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString 
+ *
+ * @throws {Error} Throws an error if `date` is undefined.
+ * @throws {Error} If the provided 'date' is not a valid date.
+ * 
+ * @example
+ * // Basic usage
+ * const formattedDate = formatDate(new Date());
+ *
+ * // With formatting options
+ * const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+ * const formattedDate = formatDate(new Date(), options);
  */
 export const formatDate = (date, options) => {
     if (date === undefined) throw new Error(ERROR_MESSAGE_DATE_IS_REQUIRED)
