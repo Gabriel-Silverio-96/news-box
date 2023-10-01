@@ -44,14 +44,14 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import axios from '../service/axios'
-import CardArticle from '../components/CardArticle.vue'
-import CustomButton from '../components/CustomButton.vue'
-import TextField from '../components/TextField.vue'
-import LoadingIcon from '../components/LoadingIcon.vue'
-import AlertComponent from '../components/AlertComponent.vue'
+import { useStore } from 'vuex'
+import AlertComponent from '@/components/AlertComponent.vue'
+import CardArticle from '@/components/CardArticle.vue'
+import CustomButton from '@/components/CustomButton.vue'
+import LoadingIcon from '@/components/LoadingIcon.vue'
+import TextField from '@/components/TextField.vue'
+import axios from '@/service/axios'
 
 const store = useStore()
 const router = useRouter()

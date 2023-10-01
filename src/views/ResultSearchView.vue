@@ -36,12 +36,12 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import AlertComponent from '../components/AlertComponent.vue'
-import CardArticle from '../components/CardArticle.vue'
-import CustomButton from '../components/CustomButton.vue'
-import LoadingIcon from '../components/LoadingIcon.vue'
-import TextField from '../components/TextField.vue'
-import axios from '../service/axios'
+import AlertComponent from '@/components/AlertComponent.vue'
+import CardArticle from '@/components/CardArticle.vue'
+import CustomButton from '@/components/CustomButton.vue'
+import LoadingIcon from '@/components/LoadingIcon.vue'
+import TextField from '@/components/TextField.vue'
+import axios from '@/service/axios'
 
 const store = useStore()
 const route = useRoute()

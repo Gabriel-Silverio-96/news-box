@@ -28,10 +28,10 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import IndicatorBadge from './IndicatorBadge.vue'
-import SkeletonComponent from './SkeletonComponent.vue'
-import { formatDate } from '../helps/format-date'
-import errorImage from '../assets/images/error-image.png'
+import errorImage from '@/assets/images/error-image.png'
+import IndicatorBadge from '@/components/IndicatorBadge.vue'
+import SkeletonComponent from '@/components/SkeletonComponent.vue'
+import { formatDate } from '@/helps/format-date'
 
 const { publishedAt, image } = defineProps({
   url: String,
