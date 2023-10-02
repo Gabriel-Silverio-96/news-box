@@ -26,8 +26,8 @@ const TESTS_CASES = [
 ]
 
 
-describe("AlertComponent", () => {
-    it("Render component", () => {
+describe("AlertComponent.vue", () => {
+    it("render component", () => {
         const component = mount(AlertComponent, {
             props: {
                 message: 'This is an alert message',
@@ -40,7 +40,7 @@ describe("AlertComponent", () => {
     })
 
     it.each(TESTS_CASES)(
-        'Should show the alert with the defined message, severity and show properties',
+        'should show the alert with the defined message, severity and show properties',
         ({ message, severity, expectedClass }) => {
             const component = mount(AlertComponent, {
                 props: {
