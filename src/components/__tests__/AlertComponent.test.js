@@ -36,7 +36,7 @@ describe("AlertComponent.vue", () => {
             },
         });
 
-        expect(wrapper.exists()).toBeTruthy()
+        expect(wrapper.exists()).toBe(true)
     })
 
     it('unmount component', () => {

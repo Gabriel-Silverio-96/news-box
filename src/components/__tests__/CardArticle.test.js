@@ -54,7 +54,6 @@ describe('CardArticle.vue', () => {
             },
         });
 
-        expect(wrapper.exists()).toBeTruthy()
         expect(wrapper.find('a').attributes("href")).toBe(url);
         expect(wrapper.html()).toContain(title);
         expect(wrapper.html()).toContain(description);
