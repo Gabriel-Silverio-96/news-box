@@ -39,6 +39,19 @@ describe("AlertComponent.vue", () => {
         expect(component.exists()).toBeTruthy()
     })
 
+    it('unmount component', () => {
+        const component = mount(AlertComponent, {
+            props: {
+                message: 'This is an alert message',
+                severity: 'error',
+                show: true,
+            },
+        });
+
+        component.unmount()
+        expect(component.exists()).toBe(false)
+    });
+
     it.each(TESTS_CASES)(
         'should show the alert with the defined message, severity and show properties',
         ({ message, severity, expectedClass }) => {
