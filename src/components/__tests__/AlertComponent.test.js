@@ -28,7 +28,7 @@ const TESTS_CASES = [
 
 describe("AlertComponent.vue", () => {
     it("render component", () => {
-        const component = mount(AlertComponent, {
+        const wrapper = mount(AlertComponent, {
             props: {
                 message: 'This is an alert message',
                 severity: 'error',
@@ -36,11 +36,11 @@ describe("AlertComponent.vue", () => {
             },
         });
 
-        expect(component.exists()).toBeTruthy()
+        expect(wrapper.exists()).toBeTruthy()
     })
 
     it('unmount component', () => {
-        const component = mount(AlertComponent, {
+        const wrapper = mount(AlertComponent, {
             props: {
                 message: 'This is an alert message',
                 severity: 'error',
@@ -48,14 +48,14 @@ describe("AlertComponent.vue", () => {
             },
         });
 
-        component.unmount()
-        expect(component.exists()).toBe(false)
+        wrapper.unmount()
+        expect(wrapper.exists()).toBe(false)
     });
 
     it.each(TESTS_CASES)(
         'should show the alert with the defined message, severity and show properties',
         ({ message, severity, expectedClass }) => {
-            const component = mount(AlertComponent, {
+            const wrapper = mount(AlertComponent, {
                 props: {
                     message,
                     severity,
@@ -63,9 +63,9 @@ describe("AlertComponent.vue", () => {
                 },
             });
 
-            expect(component.exists()).toBeTruthy()
-            expect(component.text()).toContain(message);
-            expect(component.classes()).toContain(expectedClass);
+            expect(wrapper.exists()).toBeTruthy()
+            expect(wrapper.text()).toContain(message);
+            expect(wrapper.classes()).toContain(expectedClass);
         }
     );
 })
