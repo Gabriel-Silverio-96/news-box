@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import AlertComponent from "../AlertComponent.vue"
+import AlertComponent from "@/components/AlertComponent.vue"
 
 const TESTS_CASES = [
     {

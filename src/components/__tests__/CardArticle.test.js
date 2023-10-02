@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import CardArticle from '../CardArticle.vue';
+import CardArticle from '@/components/CardArticle.vue';
 import { describe, expect, it } from 'vitest';
 
 const url = 'https://example.com';
