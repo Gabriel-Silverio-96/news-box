@@ -1,5 +1,5 @@
 <template>
-  <div :class="['alert', severityClass]" v-show="show">
+  <div :class="['alert', severityClass]" v-show="show" role="alert">
     <p>{{ message }}</p>
   </div>
 </template>
