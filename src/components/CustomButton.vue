@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" :aria-disabled="disabled" @click="onClick">
+  <button tabindex="0" :disabled="disabled" @click="onClick">
     <slot></slot>
   </button>
 </template>
