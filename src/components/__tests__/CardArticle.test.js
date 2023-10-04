@@ -55,10 +55,10 @@ describe('CardArticle.vue', () => {
         });
 
         expect(wrapper.find('a').attributes("href")).toBe(url);
-        expect(wrapper.html()).toContain(title);
-        expect(wrapper.html()).toContain(description);
-        expect(wrapper.html()).toContain('9/28/2022');
-        expect(wrapper.html()).toContain(label);
+        expect(wrapper.text()).toContain(title);
+        expect(wrapper.text()).toContain(description);
+        expect(wrapper.text()).toContain('9/28/2022');
+        expect(wrapper.text()).toContain(label);
     });
 
     it('should handles image error', () => {
