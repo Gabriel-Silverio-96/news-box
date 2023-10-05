@@ -1,7 +1,7 @@
 <template>
   <header>
-    <button @click="onClickMenu">
-      <img src="@/assets/icons/IconMenu.svg" />
+    <button @click="onClickMenu" :aria-pressed="isOpenAside" aria-label="toogle menu">
+      <img src="@/assets/icons/IconMenu.svg" aria-hidden="true" />
     </button>
   </header>
   <aside v-show="isOpenAside">
