@@ -3,29 +3,25 @@ import { RouterLinkStub, mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import store from '@/stores'
 
+const wrapperComponent = () =>
+    mount(MainHeader, {
+        global: {
+            plugins: [store],
+            stubs: {
+                RouterLink: RouterLinkStub
+            }
+        }
+    })
+
 describe('MainHeader.vue', () => {
     it('mount component', () => {
-        const wrapper = mount(MainHeader, {
-            global: {
-                plugins: [store],
-                stubs: {
-                    RouterLink: RouterLinkStub
-                }
-            }
-        })
+        const wrapper = wrapperComponent()
 
         expect(wrapper.exists()).toBe(true)
     })
 
     it('unmount component', () => {
-        const wrapper = mount(MainHeader, {
-            global: {
-                plugins: [store],
-                stubs: {
-                    RouterLink: RouterLinkStub
-                }
-            }
-        })
+        const wrapper = wrapperComponent()
 
         wrapper.unmount()
         expect(wrapper.exists()).toBe(false)
@@ -33,14 +29,7 @@ describe('MainHeader.vue', () => {
 
 
     it('should open the aside when clicked on menu button', async () => {
-        const wrapper = mount(MainHeader, {
-            global: {
-                plugins: [store],
-                stubs: {
-                    RouterLink: RouterLinkStub
-                }
-            }
-        })
+        const wrapper = wrapperComponent()
 
         await wrapper.find('button').trigger('click')
 
@@ -48,14 +37,7 @@ describe('MainHeader.vue', () => {
     })
 
     it('should show message no queries when array queries are empty', async () => {
-        const wrapper = mount(MainHeader, {
-            global: {
-                plugins: [store],
-                stubs: {
-                    RouterLink: RouterLinkStub
-                }
-            }
-        })
+        const wrapper = wrapperComponent()
 
         await wrapper.find('button').trigger('click')
         const messageNoQueries = wrapper.find('[data-test="message-no-queries-searched"]')
@@ -67,14 +49,7 @@ describe('MainHeader.vue', () => {
         const newQuery = 'new query';
         store.commit('addQuery', newQuery)
 
-        const wrapper = mount(MainHeader, {
-            global: {
-                plugins: [store],
-                stubs: {
-                    RouterLink: RouterLinkStub
-                }
-            }
-        })
+        const wrapper = wrapperComponent()
 
         const messageNoQueries = wrapper.find('[data-test="message-no-queries-searched"]')
 
