@@ -8,7 +8,7 @@
     <RouterLink to="/">Home</RouterLink>
     <h3>Terms searched</h3>
 
-    <div v-show="!state.querys.length">
+    <div v-show="!state.querys.length" data-test="message-no-queries-searched">
       <p>no terms were searched</p>
     </div>
 
