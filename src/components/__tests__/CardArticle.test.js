@@ -9,33 +9,28 @@ const description = 'Description card';
 const publishedAt = '2022-09-28T08:14:24Z';
 const label = 'Label';
 
+const wrapperComponent = (props) =>
+    mount(CardArticle, {
+        props: {
+            url,
+            image,
+            title,
+            description,
+            publishedAt,
+            label,
+            ...props
+        },
+    });
+
 describe('CardArticle.vue', () => {
     it('mount component', () => {
-        const wrapper = mount(CardArticle, {
-            props: {
-                url,
-                image,
-                title,
-                description,
-                publishedAt,
-                label
-            },
-        });
+        const wrapper = wrapperComponent()
 
         expect(wrapper.exists()).toBe(true)
     });
 
     it('unmount component', () => {
-        const wrapper = mount(CardArticle, {
-            props: {
-                url,
-                image,
-                title,
-                description,
-                publishedAt,
-                label
-            },
-        });
+        const wrapper = wrapperComponent()
 
         wrapper.unmount()
         expect(wrapper.exists()).toBe(false)
@@ -43,16 +38,7 @@ describe('CardArticle.vue', () => {
 
 
     it('should correctly render component with defined props', () => {
-        const wrapper = mount(CardArticle, {
-            props: {
-                url,
-                image,
-                title,
-                description,
-                publishedAt,
-                label
-            },
-        });
+        const wrapper = wrapperComponent()
 
         expect(wrapper.find('a').attributes("href")).toBe(url);
         expect(wrapper.text()).toContain(title);
@@ -61,22 +47,13 @@ describe('CardArticle.vue', () => {
         expect(wrapper.text()).toContain(label);
     });
 
-    it('should handles image error', () => {
-        const wrapper = mount(CardArticle, {
-            props: {
-                url,
-                image: 'https://example.com/non-existent-image.jpg',
-                title,
-                description,
-                publishedAt,
-                label,
-            },
-        });
-
+    it('should handles image error', async () => {
+        const wrapper = wrapperComponent({ image: 'https://example.com/non-existent-image.jpg' })
 
         const expected = '/src/assets/images/error-image.png';
 
-        wrapper.find('img').trigger('error');
+        await wrapper.find('img').trigger('error');
+
         expect(wrapper.find('img').attributes('src')).toBe(expected);
     });
 });
