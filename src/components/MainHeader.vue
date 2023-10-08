@@ -8,12 +8,12 @@
     <RouterLink to="/">Home</RouterLink>
     <h3>Terms searched</h3>
 
-    <div v-show="!state.querys.length" data-test="message-no-queries-searched">
+    <div v-show="!state.queries.length" data-test="message-no-queries-searched">
       <p>no terms were searched</p>
     </div>
 
     <ul>
-      <li v-for="query in state.querys" :key="query">
+      <li v-for="query in state.queries" :key="query">
         {{ query }}
       </li>
     </ul>

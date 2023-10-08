@@ -1,12 +1,12 @@
 import { createStore } from 'vuex';
 
 const state = {
-  querys: []
+  queries: []
 }
 
 const mutations = {
   addQuery(state, data) {
-    state.querys.push(data)
+    state.queries.push(data)
   }
 }
 
