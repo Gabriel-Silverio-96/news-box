@@ -27,7 +27,7 @@ const TESTS_CASES = [
 
 
 describe("AlertComponent.vue", () => {
-    it("render component", () => {
+    it("mount component", () => {
         const wrapper = mount(AlertComponent, {
             props: {
                 message: 'This is an alert message',
