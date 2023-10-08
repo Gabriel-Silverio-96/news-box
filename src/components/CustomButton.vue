@@ -1,20 +1,16 @@
 <template>
-  <button :disabled="disabled" @click="onClick" :class="buttonClass">
+  <button tabindex="0" :disabled="disabled" @click="onClick">
     <slot></slot>
   </button>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-
-const props = defineProps({
+defineProps({
   disabled: Boolean
 })
 
 const emit = defineEmits(['click'])
 const onClick = (event) => emit('click', event)
-
-const buttonClass = computed(() => ({ 'button-disabled': props.disabled }))
 </script>
 
 <style scoped>
@@ -32,13 +28,13 @@ button {
     background-color: transparent;
     color: var(--color-primary-base);
   }
-}
 
-.button-disabled {
-  pointer-events: none;
-  background-color: var(--color-gray-200);
-  color: var(--color-common-black);
-  border-color: transparent;
-  opacity: 0.5;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-gray-200);
+    color: var(--color-common-black);
+    border-color: transparent;
+    opacity: 0.5;
+  }
 }
 </style>
