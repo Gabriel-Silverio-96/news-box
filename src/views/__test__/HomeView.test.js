@@ -118,7 +118,7 @@ describe('HomeView.vue', () => {
         })
     })
 
-    it.only('should show default error message when request fails', async () => {
+    it('should show default error message when request fails', async () => {
         const requestHandler = () =>
             rest.get(apiBaseURL('top-headlines'), (req, res, ctx) => {
                 return res(
