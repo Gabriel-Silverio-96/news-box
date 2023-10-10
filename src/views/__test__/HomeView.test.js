@@ -69,8 +69,10 @@ describe('HomeView.vue', () => {
     it('should make a request when the component is mounted', async () => {
         const requestHandler = () =>
             rest.get(apiBaseURL('top-headlines'), (req, res, ctx) => {
-                return res(ctx.status(200),
-                    ctx.json(TOP_HEADLINES_SUCCESS_MOCK_RESPONSE))
+                return (
+                    res(ctx.status(200),
+                        ctx.json(TOP_HEADLINES_SUCCESS_MOCK_RESPONSE))
+                )
             })
 
         server.use(requestHandler())
@@ -104,7 +106,7 @@ describe('HomeView.vue', () => {
                 )
             })
 
-        server.use(requestHandler)
+        server.use(requestHandler())
         const wrapper = wrapperComponent()
 
         const [message] = TOP_HEADLINES_ERROR_MOCK_RESPONSE.errors
@@ -113,6 +115,23 @@ describe('HomeView.vue', () => {
         await vi.waitFor(() => {
             expect(wrapper.text()).toContain(message);
             expect(alertComponent.isVisible()).toBe(true);
+        })
+    })
+
+    it.only('should show default error message when request fails', async () => {
+        const requestHandler = () =>
+            rest.get(apiBaseURL('top-headlines'), (req, res, ctx) => {
+                return res(
+                    ctx.status(402),
+                    ctx.json(null)
+                )
+            })
+
+        server.use(requestHandler())
+        const wrapper = wrapperComponent()
+
+        await vi.waitFor(() => {
+            expect(wrapper.text()).toContain('There was an error, please try again later')
         })
     })
 })

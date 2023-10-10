@@ -40,4 +40,4 @@ export const TOP_HEADLINES_SUCCESS_MOCK_RESPONSE = {
     ]
 }
 
-export const TOP_HEADLINES_ERROR_MOCK_RESPONSE = { errors: ["There was an error"] }
+export const TOP_HEADLINES_ERROR_MOCK_RESPONSE = { errors: ["We had a problem"] }
