@@ -3,7 +3,7 @@ import HomeView from "@/views/HomeView.vue"
 import { RouterLinkStub, mount } from "@vue/test-utils"
 import { setupServer } from 'msw/node'
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest"
-import { handlers, apiBaseURL } from "@/mocks/handlers"
+import { apiBaseURL } from "@/mocks/handlers"
 import { formatDate } from '@/helps/format-date'
 import router from '@/router'
 import { rest } from 'msw'
@@ -19,7 +19,7 @@ const wrapperComponent = () =>
         }
     })
 
-const server = setupServer(...handlers)
+const server = setupServer()
 
 beforeAll(() => {
     const requestHandler = () =>
