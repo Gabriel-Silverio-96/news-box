@@ -68,7 +68,7 @@ const fetchGetArticlesTopHeadlines = async () => {
 
     articles.value = data.articles
   } catch (error) {
-    if (error.response === undefined) {
+    if (error.response === undefined || error.response.data === null) {
       errorMessage.value = 'There was an error, please try again later'
       return
     }
