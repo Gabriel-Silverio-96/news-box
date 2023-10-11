@@ -24,9 +24,7 @@ const wrapperComponent = () => {
     })
 }
 
-
 const server = setupServer()
-
 
 beforeEach(async () => {
     router.push('/result-search')
@@ -213,7 +211,7 @@ describe('ResultSearchView.vue', () => {
         })
     })
 
-    it('should be make search by input type', async () => {
+    it('should make a search request using the input entered', async () => {
         let searchParams;
 
         router.push(`/result-search?query=${query}`)
@@ -240,4 +238,3 @@ describe('ResultSearchView.vue', () => {
         expect(searchParams).toBe(textEnteredInInput)
     })
 })
-
