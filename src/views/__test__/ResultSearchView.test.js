@@ -32,6 +32,7 @@ beforeEach(async () => {
 
 beforeAll(() => {
     vi.clearAllMocks()
+
     const requestHandler = () =>
         rest.get(apiBaseURL('search'), (req, res, ctx) => {
             return (
