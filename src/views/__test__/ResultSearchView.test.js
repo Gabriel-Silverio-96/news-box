@@ -13,8 +13,8 @@ import { formatDate } from '@/helps/format-date'
 const MOCK_ROUTER_PUSH = vi.fn();
 const query = 'soccer';
 
-const wrapperComponent = () => {
-    return mount(ResultSearchView, {
+const wrapperComponent = () =>
+    mount(ResultSearchView, {
         global: {
             plugins: [store, router],
             stubs: {
@@ -22,7 +22,6 @@ const wrapperComponent = () => {
             },
         }
     })
-}
 
 const server = setupServer()
 
