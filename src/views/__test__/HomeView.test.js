@@ -22,6 +22,8 @@ const wrapperComponent = () =>
 const server = setupServer()
 
 beforeAll(() => {
+    vi.clearAllMocks()
+
     const requestHandler = () =>
         rest.get(apiBaseURL('top-headlines'), (req, res, ctx) => {
             return res(
