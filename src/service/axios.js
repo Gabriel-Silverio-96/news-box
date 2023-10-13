@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const BASE_URL = "https://gnews.io/api/v4";
 export const TIMEOUT_ERROR_MESSAGE = "There was an unexpected problem, your request is taking too long. Try again later";
+export const DEFAULT_ERROR_MESSAGE = "There was an error, please try again later";
 
 export const ONE_MINUTE_IN_MILLISECONDS = 60000;
 
