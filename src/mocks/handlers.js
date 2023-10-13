@@ -1,4 +1,5 @@
-// TODO: import baseURL
-export const apiBaseURL = (path) => `https://gnews.io/api/v4/${path}`
+import { BASE_URL } from '@/service/axios'
+
+export const apiBaseURL = (path) => `${BASE_URL}/${path}`
 
 export const handlers = []
