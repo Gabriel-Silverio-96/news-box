@@ -1,8 +1,8 @@
 /**
- * Checks if the given error indicates a request error.
+ * Checks if the given error indicates a error request.
  *
  * @param {error} error - The error object to check.
- * @returns {boolean} True if it's a request error, false otherwise.
+ * @returns {boolean} True if it's a error request, false otherwise.
  */
 export const isErrorRequest = (error) => {
     if (!error) return true
