@@ -52,6 +52,7 @@ import CustomButton from '@/components/CustomButton.vue'
 import LoadingIcon from '@/components/LoadingIcon.vue'
 import TextField from '@/components/TextField.vue'
 import axios from '@/service/axios'
+import { isErrorRequest } from '@/helps/is-error-request'
 
 const store = useStore()
 const router = useRouter()
@@ -68,7 +69,7 @@ const fetchGetArticlesTopHeadlines = async () => {
 
     articles.value = data.articles
   } catch (error) {
-    if (error.response === undefined || error.response.data === null) {
+    if (isErrorRequest(error)) {
       errorMessage.value = 'There was an error, please try again later'
       return
     }
