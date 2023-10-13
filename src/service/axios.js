@@ -1,17 +1,16 @@
 import axios from "axios";
 
-const baseURL = "https://gnews.io/api/v4";
+export const BASE_URL = "https://gnews.io/api/v4";
+export const TIMEOUT_ERROR_MESSAGE = "There was an unexpected problem, your request is taking too long. Try again later";
 
-const ONE_MINUTE_IN_MILLISECONDS = 60000;
+export const ONE_MINUTE_IN_MILLISECONDS = 60000;
 
-const api = axios.create({
-    baseURL,
+export default axios.create({
+    baseURL: BASE_URL,
     timeout: ONE_MINUTE_IN_MILLISECONDS,
     params: {
         apikey: import.meta.env.VITE_GNEWS_API_KEY,
         lang: "en"
     },
-    timeoutErrorMessage: "There was an unexpected problem, your request is taking too long. Try again later"
+    timeoutErrorMessage: TIMEOUT_ERROR_MESSAGE
 });
-
-export default api;
