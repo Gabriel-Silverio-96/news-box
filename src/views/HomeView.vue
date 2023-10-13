@@ -51,7 +51,7 @@ import CardArticle from '@/components/CardArticle.vue'
 import CustomButton from '@/components/CustomButton.vue'
 import LoadingIcon from '@/components/LoadingIcon.vue'
 import TextField from '@/components/TextField.vue'
-import axios from '@/service/axios'
+import axios, { DEFAULT_ERROR_MESSAGE } from '@/service/axios'
 import { isErrorRequest } from '@/helps/is-error-request'
 
 const store = useStore()
@@ -70,7 +70,7 @@ const fetchGetArticlesTopHeadlines = async () => {
     articles.value = data.articles
   } catch (error) {
     if (isErrorRequest(error)) {
-      errorMessage.value = 'There was an error, please try again later'
+      errorMessage.value = DEFAULT_ERROR_MESSAGE
       return
     }
 

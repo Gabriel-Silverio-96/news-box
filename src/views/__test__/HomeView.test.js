@@ -8,6 +8,7 @@ import { formatDate } from '@/helps/format-date'
 import router from '@/router'
 import { rest } from 'msw'
 import { TOP_HEADLINES_SUCCESS_MOCK_RESPONSE, TOP_HEADLINES_ERROR_MOCK_RESPONSE } from './mocks/HomeView.mock'
+import { DEFAULT_ERROR_MESSAGE } from '@/service/axios'
 
 const wrapperComponent = () =>
     mount(HomeView, {
@@ -133,7 +134,7 @@ describe('HomeView.vue', () => {
         const wrapper = wrapperComponent()
 
         await vi.waitFor(() => {
-            expect(wrapper.text()).toContain('There was an error, please try again later')
+            expect(wrapper.text()).toContain(DEFAULT_ERROR_MESSAGE)
         })
     })
 })
