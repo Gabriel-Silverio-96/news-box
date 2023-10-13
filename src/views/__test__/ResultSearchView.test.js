@@ -7,7 +7,7 @@ import { setupServer } from 'msw/node'
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { apiBaseURL } from "@/mocks/handlers"
 import { SEARCH_NOT_FOUND_MOCK_RESPONSE, SEARCH_SUCCESS_MOCK_RESPONSE } from './mocks/ResultSearch.mock'
-import axios from '@/service/axios'
+import axios, { DEFAULT_ERROR_MESSAGE } from '@/service/axios'
 import { formatDate } from '@/helps/format-date'
 
 const MOCK_ROUTER_PUSH = vi.fn();
@@ -236,5 +236,22 @@ describe('ResultSearchView.vue', () => {
         await wrapper.find('form').trigger('submit.prevent')
 
         expect(searchParams).toBe(textEnteredInInput)
+    })
+
+    it('should show default error message when request fails', async () => {
+        const requestHandler = () =>
+            rest.get(apiBaseURL('search'), (req, res, ctx) => {
+                return res(
+                    ctx.status(402),
+                    ctx.json(null)
+                )
+            })
+
+        server.use(requestHandler())
+        const wrapper = wrapperComponent()
+
+        await vi.waitFor(() => {
+            expect(wrapper.text()).toContain(DEFAULT_ERROR_MESSAGE)
+        })
     })
 })
