@@ -1,23 +1,23 @@
-import { mount } from "@vue/test-utils";
+import LoadingIcon from '@/components/LoadingIcon.vue';
+import { shallowMount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import LoadingIcon from '@/components/LoadingIcon.vue'
 
 describe('LoadingIcon.vue', () => {
     it('mmont component', () => {
-        const wrapper = mount(LoadingIcon)
+        const wrapper = shallowMount(LoadingIcon)
 
         expect(wrapper.exists()).toBe(true)
     })
 
     it('unmmont component', () => {
-        const wrapper = mount(LoadingIcon)
+        const wrapper = shallowMount(LoadingIcon)
 
         wrapper.unmount()
         expect(wrapper.exists()).toBe(false)
     })
 
     it('should not be visible when isLoading is false', () => {
-        const wrapper = mount(LoadingIcon, { props: { isLoading: false } })
+        const wrapper = shallowMount(LoadingIcon, { props: { isLoading: false } })
 
         expect(wrapper.isVisible()).toBe(false)
     })
@@ -27,7 +27,7 @@ describe('LoadingIcon.vue', () => {
         const width = '50'
         const height = '45'
 
-        const wrapper = mount(LoadingIcon, { props: { message, width, height } })
+        const wrapper = shallowMount(LoadingIcon, { props: { message, width, height } })
 
         expect(wrapper.text()).toBe(message)
         expect(wrapper.find('img').attributes('width')).toBe(width)

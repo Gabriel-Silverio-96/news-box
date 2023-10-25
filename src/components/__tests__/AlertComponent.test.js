@@ -1,6 +1,6 @@
-import { mount } from "@vue/test-utils";
-import { describe, it, expect } from "vitest";
-import AlertComponent from "@/components/AlertComponent.vue"
+import AlertComponent from "@/components/AlertComponent.vue";
+import { shallowMount } from "@vue/test-utils";
+import { describe, expect, it } from "vitest";
 
 const TESTS_CASES = [
     {
@@ -28,7 +28,7 @@ const TESTS_CASES = [
 
 describe("AlertComponent.vue", () => {
     it("mount component", () => {
-        const wrapper = mount(AlertComponent, {
+        const wrapper = shallowMount(AlertComponent, {
             props: {
                 message: 'This is an alert message',
                 severity: 'error',
@@ -40,7 +40,7 @@ describe("AlertComponent.vue", () => {
     })
 
     it('unmount component', () => {
-        const wrapper = mount(AlertComponent, {
+        const wrapper = shallowMount(AlertComponent, {
             props: {
                 message: 'This is an alert message',
                 severity: 'error',
@@ -55,7 +55,7 @@ describe("AlertComponent.vue", () => {
     it.each(TESTS_CASES)(
         'should show the alert with the defined message, severity and show properties',
         ({ message, severity, expectedClass }) => {
-            const wrapper = mount(AlertComponent, {
+            const wrapper = shallowMount(AlertComponent, {
                 props: {
                     message,
                     severity,
