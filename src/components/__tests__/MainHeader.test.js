@@ -1,10 +1,10 @@
 import MainHeader from "@/components/MainHeader.vue";
-import { RouterLinkStub, mount } from "@vue/test-utils";
+import store from '@/stores';
+import { RouterLinkStub, shallowMount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import store from '@/stores'
 
 const wrapperComponent = () =>
-    mount(MainHeader, {
+    shallowMount(MainHeader, {
         global: {
             plugins: [store],
             stubs: {

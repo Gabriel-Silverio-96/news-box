@@ -1,16 +1,16 @@
-import { mount } from "@vue/test-utils";
-import { describe, expect, it } from "vitest";
 import TextField from "@/components/TextField.vue";
+import { shallowMount } from "@vue/test-utils";
+import { describe, expect, it } from "vitest";
 
 describe('TextField.vue', () => {
     it('mount component', () => {
-        const wrapper = mount(TextField)
+        const wrapper = shallowMount(TextField)
 
         expect(wrapper.exists()).toBe(true)
     })
 
     it('unmount component', () => {
-        const wrapper = mount(TextField)
+        const wrapper = shallowMount(TextField)
 
         wrapper.unmount()
         expect(wrapper.exists()).toBe(false)
@@ -23,7 +23,7 @@ describe('TextField.vue', () => {
         const value = 'Value Textfield'
         const type = 'text'
 
-        const wrapper = mount(TextField, { props: { label, id, placeholder, value, type } })
+        const wrapper = shallowMount(TextField, { props: { label, id, placeholder, value, type } })
 
         const input = wrapper.find('input')
 
@@ -35,7 +35,7 @@ describe('TextField.vue', () => {
     })
 
     it('should update the input value', async () => {
-        const wrapper = mount(TextField)
+        const wrapper = shallowMount(TextField)
 
         const input = wrapper.find('input')
         const newValue = 'new value'
